@@ -362,3 +362,11 @@ footer { font-size: 13px; color: var(--grey); text-align: center; padding: 30px 
   .hero-text > .pre, .hero-text > h1, .hero-text > .lead { order: 1; }
   .hero-grid > .visual { order: 2; margin: 8px auto 24px; width: 100%; }
 }
+/* Mobile: kein seitliches Verschieben (iOS), Bewertung nicht über dem Gesicht */
+html, body { overflow-x: clip; max-width: 100%; }
+.marquee { overflow: hidden; }
+@media (max-width: 960px) {
+  .chip.c1 { top: auto; bottom: 30%; left: -8px; }
+  .chip { padding: 10px 14px; }
+  .chip b { font-size: 19px; }
+}
