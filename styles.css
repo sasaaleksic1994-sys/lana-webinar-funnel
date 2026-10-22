@@ -360,5 +360,5 @@ footer { font-size: 13px; color: var(--grey); text-align: center; padding: 30px 
   .hero-text { display: contents; }
   .hero-text > * { order: 3; }
   .hero-text > .pre, .hero-text > h1, .hero-text > .lead { order: 1; }
-  .hero-grid > .visual { order: 2; margin: 8px 0 24px; }
+  .hero-grid > .visual { order: 2; margin: 8px auto 24px; width: 100%; }
 }
