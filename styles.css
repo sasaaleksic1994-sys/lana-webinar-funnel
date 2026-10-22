@@ -353,3 +353,12 @@ footer { font-size: 13px; color: var(--grey); text-align: center; padding: 30px 
   .voice { scroll-snap-align: start; }
 }
 @media (min-width: 961px) { .sticky-cta { display: none !important; } }
+
+/* Mobile: Headline + Lead über dem Bild, Rest darunter */
+@media (max-width: 960px) {
+  .hero-grid { display: flex; flex-direction: column; gap: 0; }
+  .hero-text { display: contents; }
+  .hero-text > * { order: 3; }
+  .hero-text > .pre, .hero-text > h1, .hero-text > .lead { order: 1; }
+  .hero-grid > .visual { order: 2; margin: 8px 0 24px; }
+}
