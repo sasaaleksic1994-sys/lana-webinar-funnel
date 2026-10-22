@@ -8,7 +8,7 @@
  *  - Fehlende Felder: ohne Vorname oder gültige E-Mail wird nichts gespeichert, Fehler landet im Blatt „Fehler“.
  *  - Gleichzeitige Anfragen: LockService verhindert doppelte Zeilen.
  */
-const SHEET_ID = ''; // ID aus der Tabellen-URL zwischen /d/ und /edit
+const SHEET_ID = '1fHbLLzHbSm6RrCJYFliE5sftNsaF3JWXYy8n6VyGlLM'; // ID aus der Tabellen-URL zwischen /d/ und /edit
 const HEADERS = ['Anmeldedatum', 'Erstanmeldung', 'Anmeldungen', 'Vorname', 'E-Mail', 'Quelle', 'Kampagne', 'Ad', 'Webinar', 'Status'];
 
 function doPost(e) {

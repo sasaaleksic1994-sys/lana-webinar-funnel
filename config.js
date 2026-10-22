@@ -5,5 +5,5 @@ window.FUNNEL_CONFIG = {
   webinarDurationMin: 120,
   webinarTitle: 'Live-Webinar mit Lana Kern: Der Silo-Fehler',
   // URL der Google-Apps-Script-Web-App (siehe apps-script/Code.gs). Leer = Demo-Modus ohne Speicherung.
-  endpoint: '',
+  endpoint: 'https://script.google.com/macros/s/AKfycbx1dMKkLFcpqIk11uMB9eBQVM7YECTNAvzW7U7he6PGvyQvXiHJUPKp_9a7yaFDRbM/exec',
 };
