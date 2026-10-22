@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fast geschafft – dein Platz im Live-Webinar</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=18">
+  <style>
+    .thanks { background: radial-gradient(1000px 500px at 80% 10%, #34506b 0%, var(--navy) 55%, #171a28 100%); color: #fff; min-height: 100vh; padding-bottom: 60px; }
+    .thanks h1 { color: #fff; }
+    .thanks .lead { color: #c9cfdb; }
+    .steps { display: grid; gap: 18px; max-width: 720px; margin: 30px auto 0; }
+    .step { background: #fff; color: var(--ink); border-radius: var(--radius); padding: 24px; display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
+    .step .num { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--peach); color: var(--navy); font-weight: 900; }
+    .step h3 { font-size: 19px; margin-bottom: 6px; }
+    .step p { margin: 0 0 12px; color: var(--grey); }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn.small { width: auto; font-size: 15px; padding: 12px 18px; }
+    .btn.ghost { background: transparent; border: 1.5px solid var(--navy); box-shadow: none; }
+    .check { width: 74px; height: 74px; border-radius: 50%; background: var(--peach); display: grid; place-items: center; margin: 10px auto 18px; color: var(--navy); font-size: 36px; font-weight: 900; animation: pop .6s cubic-bezier(.2,.8,.2,1); }
+    @keyframes pop { from { transform: scale(.3); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .sms-ok { display: none; color: #2e8b57; font-weight: 700; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="topbar">FAST GESCHAFFT · NUR NOCH EIN KLICK</div>
+  <main class="thanks">
+    <div class="wrap" style="text-align:center;padding-top:40px">
+      <div class="check">✓</div>
+      <h1 style="font-size:clamp(28px,4.5vw,44px)"><span id="hello">Danke</span>, dein Platz ist reserviert!</h1>
+      <p class="lead" style="margin:0 auto">Live-Webinar mit Lana Kern · <b id="date-text">Sonntag, 11:00 Uhr</b> · nur live, keine Aufzeichnung</p>
+
+      <div class="steps" style="text-align:left">
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <h3>Bestätige deine E-Mail-Adresse</h3>
+            <p>Wir haben dir gerade eine E-Mail geschickt. Klicke dort auf „Anmeldung bestätigen“ – erst dann bekommst du deinen Zugangslink. Nichts da? Schau im Spam- oder Werbung-Ordner nach.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <h3>Trag dir den Termin ein</h3>
+            <p>So vergisst du das Live-Webinar nicht – es gibt keine Aufzeichnung.</p>
+            <div class="row">
+              <a class="btn small" id="gcal" target="_blank" rel="noopener">Google Kalender <span class="arrow">→</span></a>
+              <a class="btn small ghost" id="ics" download="lana-kern-webinar.ics">Apple / Outlook (.ics)</a>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <h3>Optional: SMS-Erinnerung 15 Minuten vorher</h3>
+            <p>Die meisten verpassen ein Live-Webinar, weil sie es im Sonntagstrubel vergessen. Hinterlege deine Nummer und wir schicken dir kurz vorher den Link.</p>
+            <form id="sms-form" class="row" novalidate>
+              <input id="phone" type="tel" autocomplete="tel" placeholder="+49 151 …" style="flex:1;min-width:200px;font:inherit;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px">
+              <button class="btn small" type="submit">SMS aktivieren</button>
+            </form>
+            <p style="font-size:12px;margin:8px 0 0">Mit Klick willigst du ein, eine SMS-Erinnerung zu diesem Webinar zu erhalten. Jederzeit widerrufbar.</p>
+            <div class="sms-ok" id="sms-ok">✓ Erledigt – wir erinnern dich 15 Minuten vorher.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <div>
+            <h3>Leg dein aktuelles Blutbild bereit</h3>
+            <p>Falls du eins hast: Leg es am Sonntag neben dich. Du wirst deine Werte danach mit anderen Augen sehen. Und vergiss nicht – nur Live-Teilnehmerinnen erhalten das exklusive Geschenk.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="config.js?v=18"></script>
+  <script>
+    (function () {
+      const cfg = window.FUNNEL_CONFIG;
+      const start = new Date(cfg.webinarStart);
+      const end = new Date(start.getTime() + cfg.webinarDurationMin * 60000);
+      const name = sessionStorage.getItem('lk_vorname');
+      if (name) document.getElementById('hello').textContent = 'Danke, ' + name;
+
+      const fmt = new Intl.DateTimeFormat('de-DE', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' });
+      document.getElementById('date-text').textContent = fmt.format(start).replace(' um ', ', ') + ' Uhr';
+
+      const z = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+      const details = 'Kostenloses Live-Webinar mit Lana Kern. Den Zugangslink bekommst du per E-Mail. Nur live – keine Aufzeichnung.';
+      document.getElementById('gcal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+        + '&text=' + encodeURIComponent(cfg.webinarTitle)
+        + '&dates=' + z(start) + '/' + z(end)
+        + '&details=' + encodeURIComponent(details);
+
+      const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Lana Kern//Webinar//DE', 'BEGIN:VEVENT',
+        'UID:webinar-' + z(start) + '@lanakern.de', 'DTSTAMP:' + z(new Date()), 'DTSTART:' + z(start), 'DTEND:' + z(end),
+        'SUMMARY:' + cfg.webinarTitle, 'DESCRIPTION:' + details,
+        'BEGIN:VALARM', 'TRIGGER:-PT30M', 'ACTION:DISPLAY', 'DESCRIPTION:Webinar startet in 30 Minuten', 'END:VALARM',
+        'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+      document.getElementById('ics').href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+
+      document.getElementById('sms-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const phone = document.getElementById('phone').value.replace(/[^\d+]/g, '');
+        if (phone.length < 8) { document.getElementById('phone').style.borderColor = '#c0392b'; return; }
+        if (cfg.endpoint) {
+          try {
+            await fetch(cfg.endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({ action: 'sms_optin', email: sessionStorage.getItem('lk_email') || '', telefon: phone }) });
+          } catch (err) { /* Erinnerung ist optional – Fehler blockiert nichts */ }
+        }
+        e.target.style.display = 'none';
+        document.getElementById('sms-ok').style.display = 'block';
+      });
+    })();
+  </script>
+</body>
+</html>
